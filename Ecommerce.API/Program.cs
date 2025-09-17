@@ -51,6 +51,7 @@ namespace Ecommerce.API
 
             #endregion
 
+            #region Cors
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowFrontend", policy =>
@@ -62,20 +63,26 @@ namespace Ecommerce.API
                         .AllowCredentials(); // optional
                 });
             });
+            #endregion
 
+            #region Identity
             // Configure Identity
-
             builder.Services.AddIdentityCore<ApplicationUser>()
-                            .AddRoles<IdentityRole<int>>()
-                            .AddEntityFrameworkStores<ApplicationDbContext>();
+                         .AddRoles<IdentityRole<int>>()
+                         .AddEntityFrameworkStores<ApplicationDbContext>();
+            #endregion
 
+            #region DBContext
             builder.Services.AddDbContext<ApplicationDbContext>(opt =>
             opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConn")));
+            #endregion
 
+            #region Register Services
             // Register Services
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            #endregion
 
             // Register AutoMappper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

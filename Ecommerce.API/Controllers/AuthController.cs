@@ -17,12 +17,6 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpGet("test")]
-
-    public IActionResult test()
-    {
-        return Ok();
-    }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromForm] RegisterDto registerDto)

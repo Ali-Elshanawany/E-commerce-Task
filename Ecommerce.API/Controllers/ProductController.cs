@@ -22,13 +22,6 @@ public class ProductController : ControllerBase
         _ProductService = productService;
     }
 
-    [HttpGet("test")]
-    public IActionResult test()
-    {
-        return Ok("Holaaaaaaaaaaaaaaa");
-    }
-
-
     [HttpGet]
     public async Task<IActionResult> getProducts()
     {

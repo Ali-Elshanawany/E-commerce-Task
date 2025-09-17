@@ -131,7 +131,6 @@ public class AuthService : IAuthService
             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
             UserName = user.UserName,
             LastLogin = DateTime.UtcNow,
-            //ExpiresOn = jwtSecurityToken.ValidTo,
 
         };
 
@@ -226,8 +225,7 @@ public class AuthService : IAuthService
         var JwtSecurityToken = new JwtSecurityToken(
         issuer: _Jwt.Issuer,
         audience: _Jwt.Audience,
-        //expires: DateTime.Now.AddDays(_Jwt.DurationInDays),
-        expires: DateTime.Now.AddMinutes(1),
+        expires: DateTime.Now.AddMinutes(_Jwt.DurationInMinutes),
         claims: claims,
         signingCredentials: signingCredentails
         );
